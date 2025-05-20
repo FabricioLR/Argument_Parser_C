@@ -1,16 +1,17 @@
 #include "../argument-parser.h"
-#include <stdio.h>
 
 int main(int argc, char **argv){
+	add_option("--argument1", "Argumento1 para teste", OPTION_IS_REQUIRED | OPTION_VALUE_IS_REQUIRED);
+	add_option("-arg2", "Argumento2 para teste", 0);
+
 	if (!parser_init(argc, argv)){
-		printf("main |-arg1 *\n     |--argument1 *\n     optional ---\n       |-arg2\n       |--argument2\n     optional ---\n       |--argument3 *\n");
-		return 1;
+		usage();
+		return 0;
 	}
 
-	printf("Value of --arg1: %s\n", get_argument_value("-arg1"));
-	printf("--argument2 is defined? %s\n", argument_is_defined("--argument2") == 1 ? "true" : "false");
-	if (argument_is_defined("--argument3")) printf("Value of --argument3: %s\n", get_argument_value("--argument3"));
-	printf("Value of --argument3342: %s\n", get_argument_value("--argument3342"));
+	printf("%s\n", get_option_value("--argument1"));
+	if (option_is_defined("-arg2")) printf("%s\n", get_option_value("-arg2"));
+	printf("%s\n", get_option_value("-naoexiste"));
 
 	return 0;
 }
