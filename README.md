@@ -22,12 +22,11 @@ Adicione as opções desejadas, inicialize o parser e comece a usar
 int main(int argc, char **argv){
     add_option("--argument1", "Argumento1 para teste", OPTION_IS_REQUIRED | OPTION_VALUE_IS_REQUIRED);
     if (!parser_init(argc, argv)){
-		usage();
-		....
-	}
-	printf("%s\n", get_option_value("--argument1"));
-	...
-...
+        usage();
+        ....
+    }
+    printf("%s\n", get_option_value("--argument1"));
+    ...
 ```
 
 Saída esperada
