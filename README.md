@@ -14,24 +14,31 @@ Apenas copie o arquivo ![argument-pasrser.h](https://github.com/FabricioLR/Argum
 
 ## ☕ Usando
 
-Primeiramente, crie um arquivo de configuração, tal como em [argument-parser.config](https://github.com/FabricioLR/Argument_Parser_C/blob/master/examples/argument-parser.config)
-```
-#name:alias:has_value:required:
--arg1:--argument1:1:1
--arg2:--argument2:0:0
---argument3:0:1:0
--argument10:0:1:1
-```
-
-Inicie o parser e comece a utilizar
+Adicione as opções desejadas, inicialize o parser e comece a usar
 
 ```
 #include "argument-parser.h"
 
 int main(int argc, char **argv){
-    parser_init(argc, argv))
-    printf("%s\n", get_argument_value("-arg1"));
+    add_option("--argument1", "Argumento1 para teste", OPTION_IS_REQUIRED | OPTION_VALUE_IS_REQUIRED);
+    if (!parser_init(argc, argv)){
+		usage();
+		....
+	}
+	printf("%s\n", get_option_value("--argument1"));
+	...
 ...
+```
+
+Saída esperada
+
+```
+$./example
+Option --argument1 is required
+OPTIONS: 
+     --argument1 <value>
+          description: Argumento1 para teste
+          Flags: OPTION_VALUE_IS_REQUIRED | OPTION_IS_REQUIRED
 ```
 
 
